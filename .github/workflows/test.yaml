@@ -8,11 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
+          bundler-cache: true
       - name: Test the action
         uses: ./
         with:
           rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
-          gemspec_folder: "ruby"
+          working-directory: "ruby"
       - name: Get latest gem info
         id: latest-gem
         run: |
