@@ -16,7 +16,7 @@ jobs:
         uses: ./
         with:
           rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
-          working-directory: "ruby"
+          working_directory: "ruby"
       - name: Get latest gem info
         id: latest-gem
         run: |
