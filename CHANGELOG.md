@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2021-08-13
 ### Added
-* Publish to RubyGems from a given working directory
+- Publish to RubyGems from a given `working_directory`
 
-[Unreleased]: https://github.com/cucumber-actions/create-release-pr/compare/0.0.0...HEAD
+[Unreleased]: https://github.com/cucumber-actions/create-release-pr/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/cucumber-actions/create-release-pr/compare/0.0.0...1.0.0
