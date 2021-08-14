@@ -11,10 +11,8 @@ name: Pre-release
 # We have to run this after the tests, as the tests for this particular action mess
 # around with tags and branches, and can confuse this workflow.
 on:
-  workflow_run:
-    workflows: ["Test"]
-    types:
-      - completed
+  push:
+    branches: [main]
 
 jobs:
   versions:
