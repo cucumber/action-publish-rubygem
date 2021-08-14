@@ -8,5 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+* Publish to RubyGems from a given working directory
 
 [Unreleased]: https://github.com/cucumber-actions/create-release-pr/compare/0.0.0...HEAD
