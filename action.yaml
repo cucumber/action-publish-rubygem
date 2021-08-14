@@ -16,3 +16,9 @@ runs:
         cd ${{ inputs.working_directory }}
         gem build -o release.gem
       shell: bash
+    - name: publish gem
+      env:
+        GEM_HOST_API_KEY: ${{ inputs.rubygems_api_key }}
+      run: |
+        gem push release.gem
+      shell: bash
