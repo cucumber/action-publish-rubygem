@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test-publish-gem:
-    name: It creates a PR
+    name: It publishes a RubyGem in a folder
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,7 +13,11 @@ jobs:
         with:
           rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
           gemspec_folder: "ruby"
-      - name: Check gem is released
+      - name: Get latest gem info
+        id: latest-gem
         run: |
-          id=$(gh pr list --base release/vA.B.C | awk -v col=1 '{print $col}')
-          [ $id ]
+          payload=$(curl https://rubygems.org//api/v1/versions/cucumber-test-release-automation/latest.json)
+          echo "::set-output name=payload::$payload"
+      - name: Check latest published gem version is as expected
+        run: |
+          [ "${{ fromJSON(steps.latest-gem.outputs.payload).version }}" == "0.0.${{ github.sha}}" ]
