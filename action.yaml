@@ -20,5 +20,5 @@ runs:
       env:
         GEM_HOST_API_KEY: ${{ inputs.rubygems_api_key }}
       run: |
-        gem push release.gem
+        gem push ${{ inputs.working_directory }}/release.gem
       shell: bash
