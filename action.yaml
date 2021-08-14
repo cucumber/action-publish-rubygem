@@ -1,0 +1,18 @@
+name: 'Publish to Rubygems'
+description: 'Build a Ruby Gen from a .gemspec file and push it to RubyGems'
+inputs:
+  rubygems_api_key: 
+    description: "API Key to use when publishing the gem"
+    required: true
+  gemspec_folder:
+    description: "Path within the repo to the folder where the .gemspec file lives"
+    required: false
+    default: "."
+runs:
+  using: "composite"
+  steps:
+    - name: build gem
+      run: |
+        cd ${{ inputs.gemspec_folder }}
+        gem build -o release.gem
+      shell: bash

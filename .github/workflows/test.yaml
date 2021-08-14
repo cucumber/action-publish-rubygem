@@ -1,0 +1,19 @@
+name: Test
+
+on: push
+
+jobs:
+  test-publish-gem:
+    name: It creates a PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test the action
+        uses: ./
+        with:
+          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
+          gemspec_folder: "ruby"
+      - name: Check gem is released
+        run: |
+          id=$(gh pr list --base release/vA.B.C | awk -v col=1 '{print $col}')
+          [ $id ]

@@ -1,0 +1,66 @@
+name: Pre-release
+
+# Prepares a new release
+#
+# To trigger this workflow, simply change the CHANGELOG.md file, replacing the
+# "Unreleased" header text with the new release's version number.
+#
+# The workflow will automatically create a pull request for the release.
+#
+
+# We have to run this after the tests, as the tests for this particular action mess
+# around with tags and branches, and can confuse this workflow.
+on:
+  workflow_run:
+    workflows: ["Test"]
+    types:
+      - completed
+
+jobs:
+  versions:
+    runs-on: ubuntu-latest
+    name: Get version numbers
+    outputs:
+      released-version: ${{ steps.current-release.outputs.number }}
+      next-version: ${{ steps.next-release.outputs.result }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: read the current release version from git tags
+        id: current-release
+        uses: cucumber-actions/get-released-version@v1.0.0
+      - name: read latest version from the changelog
+        id: next-release-from-changelog
+        uses: cucumber-actions/changelog-action@v1.3
+        with:
+          args: latest
+      - name: Parse version number from changelog release name
+        id: next-release
+        run: |
+          version_heading=${{ steps.next-release-from-changelog.outputs.result }}
+          version=${version_heading/v}
+          echo "::set-output name=result::$version"
+      - name: Report version numbers detected
+        run: |
+          echo "Released: ${{ steps.current-release.outputs.number }}"
+          echo "Next:     ${{ steps.next-release.outputs.result }}"
+
+  create-release-pr:
+    runs-on: ubuntu-latest
+    name: Create / Update Release PR
+    needs: versions
+    if: needs.versions.outputs.released-version != needs.versions.outputs.next-version
+    env:
+      next_version: ${{ needs.versions.outputs.next-version }}
+      released_version: ${{ needs.versions.outputs.released-version }}
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: ./
+        with:
+          released_version: ${{ env.released_version }}
+          next_version: ${{ env.next_version }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
