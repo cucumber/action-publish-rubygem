@@ -1,3 +1,5 @@
+[![Test](https://github.com/cucumber-actions/publish-rubygem/actions/workflows/test.yaml/badge.svg)](https://github.com/cucumber-actions/publish-rubygem/actions/workflows/test.yaml)
+
 # publish-rubygem
 
 Builds and publishes a Ruby Gem to https://rubygems.org
