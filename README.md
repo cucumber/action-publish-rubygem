@@ -1,4 +1,4 @@
-[![Test](https://github.com/cucumber-actions/publish-rubygem/actions/workflows/test.yaml/badge.svg)](https://github.com/cucumber-actions/publish-rubygem/actions/workflows/test.yaml)
+[![Test](https://github.com/cucumber/action-publish-rubygem/actions/workflows/test.yaml/badge.svg)](https://github.com/cucumber/action-publish-rubygem/actions/workflows/test.yaml)
 
 # publish-rubygem
 
@@ -32,7 +32,7 @@ jobs:
         with:
           ruby-version: 3.0.2
           bundler-cache: true
-      - uses: cucumber-actions/publish-rubygem@v1.0.0
+      - uses: cucumber/action-publish-rubygem@v1.0.0
         with:
           rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
 ````
