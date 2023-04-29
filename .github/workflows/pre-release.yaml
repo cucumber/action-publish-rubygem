@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
       - uses: cucumber/action-get-versions@v1.0.0
         id: versions
-      - uses: cucumber/action-create-release-pr@v1.0.0
+      - uses: cucumber/action-create-release-pr@v1.1.0
         if: steps.versions.outputs.released-version != steps.versions.outputs.changelog-latest-version
         with:
           released_version: ${{ steps.versions.outputs.released-version }}
