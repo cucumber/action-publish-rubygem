@@ -1,9 +1,14 @@
 name: Test
 
-on: 
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
-      - "!release/*"
+      - main
+      - renovate/**
 
 jobs:
   test-publish-gem:
