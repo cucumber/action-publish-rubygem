@@ -30,7 +30,7 @@ jobs:
         id: latest-gem
         run: |
           payload=$(curl https://rubygems.org//api/v1/versions/cucumber-test-release-automation/latest.json)
-          echo "payload==$payload" >> $GITHUB_OUTPUT
+          echo "payload=$payload" >> $GITHUB_OUTPUT
       - name: Check latest published gem version is as expected
         run: |
           [ "${{ fromJSON(steps.latest-gem.outputs.payload).version }}" == "0.0.${{ github.sha}}" ]
