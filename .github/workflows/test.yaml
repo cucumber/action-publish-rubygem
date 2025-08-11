@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Publish to Rubygems
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.2
