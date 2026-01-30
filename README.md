@@ -27,10 +27,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.2
+          ruby-version: 3.3
           bundler-cache: true
       - uses: cucumber/action-publish-rubygem@v1.0.0
         with:
