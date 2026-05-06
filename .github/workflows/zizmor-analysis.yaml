@@ -5,13 +5,9 @@ on:
     branches:
       - main
       - 'releases/**'
-    paths:
-      - '.github/**'
   pull_request:
     branches:
       - main
-    paths:
-      - '.github/**'
 
 permissions: {}
 
