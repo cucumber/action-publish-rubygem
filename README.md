@@ -8,8 +8,7 @@ Very simple, just uses a couple of `gem` commands. Needs Ruby to be installed fi
 
 ## Inputs:
 
-* `rubygems_api_key`
-* `working_directory` (default `.`)
+* `working-directory` (default `.`)
 
 ## Example:
 
@@ -20,19 +19,24 @@ on:
   push:
     branches: [release/*]
 
+permissions: {}
+
 jobs:
   release:
     runs-on: ubuntu-latest
     environment: Release
     permissions:
-      contents: write
+      id-token: write
+      contents: read      
     steps:
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: rubygems/configure-rubygems-credentials@v2.0.0
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.2
-          bundler-cache: true
       - uses: cucumber/action-publish-rubygem@v1.0.0
         with:
-          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
+          working-directory: ruby
 ````
