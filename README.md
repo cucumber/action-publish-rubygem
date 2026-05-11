@@ -19,6 +19,8 @@ on:
   push:
     branches: [release/*]
 
+permissions: {}
+
 jobs:
   release:
     runs-on: ubuntu-latest
