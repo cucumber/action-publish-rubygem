@@ -1,5 +1,7 @@
 name: Test
 
+permissions: {}
+
 on:
   pull_request:
     branches:
@@ -14,6 +16,9 @@ jobs:
     name: It publishes a RubyGem in a folder
     runs-on: ubuntu-latest
     environment: Publish to Rubygems
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -22,10 +27,11 @@ jobs:
         with:
           ruby-version: 3.0.2
           bundler-cache: true
+      - name: Configure RubyGems Credentials
+        uses: rubygems/configure-rubygems-credentials@762a4b77c3300434bb57c7ce80b20e36231927aa # v2.0.0
       - name: Test the action
         uses: ./
         with:
-          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
           working_directory: "test"
       - name: Get latest gem info
         id: latest-gem
