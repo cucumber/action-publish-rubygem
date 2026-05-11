@@ -32,7 +32,7 @@ jobs:
       - name: Test the action
         uses: ./
         with:
-          working_directory: "test"
+          working-directory: "test"
       - name: Get latest gem info
         id: latest-gem
         run: |

@@ -8,8 +8,7 @@ Very simple, just uses a couple of `gem` commands. Needs Ruby to be installed fi
 
 ## Inputs:
 
-* `rubygems_api_key`
-* `working_directory` (default `.`)
+* `working-directory` (default `.`)
 
 ## Example:
 
@@ -37,5 +36,5 @@ jobs:
           ruby-version: 3.0.2
       - uses: cucumber/action-publish-rubygem@v1.0.0
         with:
-          rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}
+          working-directory: ruby
 ````
