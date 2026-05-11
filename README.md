@@ -12,31 +12,34 @@ Very simple, just uses a couple of `gem` commands. Needs Ruby to be installed fi
 
 ## Example:
 
-````yaml
-name: Release
-
-on:
-  push:
-    branches: [release/*]
+```yaml
+name: Release RubyGems
 
 permissions: {}
 
+on:
+  push:
+    branches:
+      - release/*
+
 jobs:
-  release:
+  publish-rubygem:
+    name: Publish Ruby Gem
     runs-on: ubuntu-latest
     environment: Release
     permissions:
       id-token: write
-      contents: read      
+      contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6.0.2
         with:
           persist-credentials: false
-      - uses: rubygems/configure-rubygems-credentials@v2.0.0
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1.306.0
         with:
-          ruby-version: 3.0.2
-      - uses: cucumber/action-publish-rubygem@v1.0.0
+          ruby-version: 4.0.3
+          working-directory: ruby
+      - uses: rubygems/configure-rubygems-credentials@v2.0.0
+      - uses: cucumber/action-publish-rubygem@v2.0.0
         with:
           working-directory: ruby
-````
+```
