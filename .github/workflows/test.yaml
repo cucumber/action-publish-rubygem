@@ -3,13 +3,8 @@ name: Test
 permissions: {}
 
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
-      - renovate/**
+  # Do not trigger on every change. Don't spam Gems.
+  workflow_call:
 
 jobs:
   test-publish-gem:
