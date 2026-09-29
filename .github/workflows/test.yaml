@@ -25,7 +25,7 @@ jobs:
       - name: Configure RubyGems Credentials
         uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
       - name: Test the action
-        uses: ./
+        uses: $/
         with:
           working-directory: "test"
       - name: Check latest published gem version is as expected
